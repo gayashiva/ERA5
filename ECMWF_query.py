@@ -7,9 +7,10 @@ class ECMWF_query:
 
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
+        self.site = "schwarzsee"
         self.start_year = 2019
         self.end_year = 2020
-        self.resultsdir = "results/"
+        self.resultsdir = "results/" + self.site + "/"
         self.debug = False
         self.time_units = "days since 1948-01-01 00:00:00"
         self.optionals = False  # optional variables to extract depending on ROMS version (Rutgers or Kate)
@@ -25,9 +26,8 @@ class ECMWF_query:
             self.dataset_class = "ei"
             self.grid = "0.75/0.75"
 
-        self.reanalysis = "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
+        self.reanalysis = "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
         # self.area = "60/0/59/1"  # test setup North/West/South/East
-        self.site = "schwarzsee"
 
         if self.site == "schwarzsee":
             self.area = "46.7/7.24/46.64/7.3"
@@ -35,7 +35,6 @@ class ECMWF_query:
             self.area = "34.11/77.45/34.09/77.55"
         if self.site == "guttannen":
             self.area = "46.7/8.25/46.64/8.31"
-        self.resultsdir += self.site
 
         self.parameters = [
             "10m_u_component_of_wind",
@@ -54,6 +53,7 @@ class ECMWF_query:
         if self.optionals:
             self.parameters.append(
                 "evaporation",
+                "relative_humidity",
                 "mean_surface_downward_short_wave_radiation_flux",
                 "mean_surface_net_short_wave_radiation_flux"
                 "mean_surface_sensible_heat_flux",
@@ -193,5 +193,46 @@ class ECMWF_query:
                 "name": "Mean surface downward short-wave radiation flux",
                 "units": "W m-2",
                 "time_name": "swrad_time",
+            },
+            "surface_pressure": {
+                "parameter_id": "None",
+                "short_name": "sp",
+                "name": "Surface pressure",
+                "units": "Pa",
+            },
+            "surface_solar_radiation_downwards": {
+                "short_name": "ssrd",
+                "name": "Surface solar radiation downwards",
+                "units": "J m-2",
+            },
+            "surface_thermal_radiation_downwards": {
+                "short_name": "strd",
+                "name": "Surface thermal radiation downwards",
+                "units": "J m-2",
+            },
+            "total_sky_direct_solar_radiation_at_surface": {
+                "short_name": "fdir",
+                "name": "total_sky_direct_solar_radiation_at_surface",
+                "units": "J m-2",
+            },
+            "total_cloud_cover": {
+                "short_name": "tcc",
+                "name": "total_cloud_cover",
+                "units": "None",
+            },
+            "specific_humidity": {
+                "short_name": "q",
+                "name": "specific_humidity",
+                "units": "kg kg-1",
+            },
+            "relative_humidity": {
+                "short_name": "r",
+                "name": "relative_humidity",
+                "units": "%",
+            },
+            "relative_humidity": {
+                "short_name": "r",
+                "name": "relative_humidity",
+                "units": "%",
             },
         }[parameter]
