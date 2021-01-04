@@ -9,7 +9,7 @@ class ECMWF_query:
         self.use_era5 = True
         self.site = "schwarzsee"
         self.start_year = 2019
-        self.end_year = 2020
+        self.end_year = 2019
         self.resultsdir = "results/" + self.site + "/"
         self.debug = False
         self.time_units = "days since 1948-01-01 00:00:00"
@@ -26,7 +26,7 @@ class ECMWF_query:
             self.dataset_class = "ei"
             self.grid = "0.75/0.75"
 
-        self.reanalysis = "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
+        self.reanalysis = "reanalysis-era5-single-levels"  # "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
         # self.area = "60/0/59/1"  # test setup North/West/South/East
 
         if self.site == "schwarzsee":
@@ -37,17 +37,17 @@ class ECMWF_query:
             self.area = "46.7/8.25/46.64/8.31"
 
         self.parameters = [
-            "10m_u_component_of_wind",
-            "10m_v_component_of_wind",
-            "2m_temperature",
-            "2m_dewpoint_temperature",
-            "surface_pressure",
+            # "10m_u_component_of_wind",
+            # "10m_v_component_of_wind",
+            # "2m_temperature",
+            # "2m_dewpoint_temperature",
+            # "surface_pressure",
             "surface_solar_radiation_downwards",
             "surface_thermal_radiation_downwards",
-            "total_sky_direct_solar_radiation_at_surface",
-            "total_cloud_cover",
-            "total_precipitation",
-            "specific_humidity",
+            # "total_precipitation",
+            # "specific_humidity",
+            # "total_sky_direct_solar_radiation_at_surface",
+            # "total_cloud_cover",
         ]
 
         if self.optionals:
