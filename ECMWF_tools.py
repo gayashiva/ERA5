@@ -14,8 +14,10 @@ class ECMWF_tools:
 
     def create_requests(self):
         years = [
-            self.config_ecmwf.start_year + y for y in range(self.config_ecmwf.end_year)
+            y
+            for y in range(self.config_ecmwf.start_year, self.config_ecmwf.end_year + 1)
         ]
+        print(years)
 
         if not os.path.exists(self.config_ecmwf.resultsdir):
             os.mkdir(self.config_ecmwf.resultsdir)
@@ -28,16 +30,18 @@ class ECMWF_tools:
 
                 metadata = self.config_ecmwf.get_parameter_metadata(parameter)
 
-                out_filename = "{}{}_{}_year_{}.grib".format(
+                out_filename = "{}{}_{}_year_{}_{}.grib".format(
                     self.config_ecmwf.resultsdir,
                     self.config_ecmwf.dataset,
                     metadata["short_name"],
                     year,
+                    self.config_ecmwf.reanalysis,
                 )
                 if os.path.exists(out_filename):
-                    os.remove(out_filename)
-
-                self.submit_request(parameter, year, out_filename)
+                    print("File exists")
+                else:
+                    # os.remove(out_filename)
+                    self.submit_request(parameter, year, out_filename)
 
     def submit_request(self, parameter, year, out_filename):
 

@@ -26,7 +26,7 @@ class ECMWF_query:
             self.dataset_class = "ei"
             self.grid = "0.75/0.75"
 
-        self.reanalysis = "reanalysis-era5-single-levels"  # "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
+        self.reanalysis = "reanalysis-era5-land"  # "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
         # self.area = "60/0/59/1"  # test setup North/West/South/East
 
         if self.site == "schwarzsee":
