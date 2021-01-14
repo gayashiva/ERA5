@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 import os
 import re
 
-compile = "True"
-os.chdir("results/schwarzsee/csv")
+site = "schwarzsee"
+compile = "False"
+os.chdir("results/" + site + "/csv")
 begin = datetime(2019, 1, 1)
 stop = datetime(2019, 12, 31, 23)
 days = pd.date_range(start=begin, end=stop, freq="1H")
@@ -26,32 +27,41 @@ if compile == "True":
             print("Failed to delete %s. Reason: %s" % (file_path, e))
     # Create new files
     directory = os.listdir()
-    print(directory)
     for file in directory:
         var = re.split("[.|_]", file)
         x = re.search("2019", file)
         if x:
             if len(var) == 6:
                 filename = var[1] + "_" + var[4]
+                with open(file, "r") as f_in, open(
+                    "output/" + filename + ".csv", "w"
+                ) as f_out:
+                    f_out.write(next(f_in).replace(" ", ""))
+                    i = 0
+                    for line in f_in:
+                        if i % 2 == 0:
+                            f_out.write(",".join(line.split()) + "\n")
+                        i = i + 1
             else:
                 filename = var[1]
-            with open(file, "r") as f_in, open(
-                "output/" + filename + ".csv", "w"
-            ) as f_out:
-                print(f_out)
-                f_out.write(next(f_in).replace(" ", ""))
-                i = 0
-                for line in f_in:
-                    if i % 2 == 0:
-                        f_out.write(",".join(line.split()) + "\n")
-                    i = i + 1
+                with open(file, "r") as f_in, open(
+                    "output/" + filename + ".csv", "w"
+                ) as f_out:
+                    f_out.write(next(f_in).replace(" ", ""))
+                    i = 0
+                    for line in f_in:
+                        if i % 2 == 0:
+                            f_out.write(",".join(line.split()) + "\n")
+                        i = i + 1
 
 # ERA5 begins
 directory = os.listdir("output")
 os.chdir("output")
 l = ["When"]
 for file in directory:
-    l.append(file[:-4])
+    var = re.split("[.|_]", file)
+    print(var[0])
+    l.append(var[0])
     df_in = pd.read_csv(file, sep=",", header=0)
     print(file)
     df_in = df_in.drop(
@@ -61,7 +71,7 @@ for file in directory:
     df_merged = df_merged.merge(df_in, how="outer", left_index=True, right_index=True)
     df_merged.rename(
         columns={
-            "Value": file[:-4],
+            "Value": var[0],
         },
         inplace=True,
     )
@@ -72,5 +82,18 @@ if df_merged.isnull().values.any():
 else:
     print("No Errors")
 df_merged.to_csv(
-    "/home/surya/Programs/Github/air_model/data/schwarzsee/raw/ERA5_schwarzsee.csv"
+    "/home/surya/Programs/Github/air_model/data/" + site + "/raw/ERA5_" + site + ".csv"
 )
+# RMSE
+# print("RMSE Temp", ((df_merged.T_a - df_merged.T_a<) ** 2).mean() ** 0.5)
+
+
+# slope, intercept, r_value1, p_value, std_err = stats.linregress(
+#     df.T_a.values, df_in3.T_a.values
+# )
+# slope, intercept, r_value2, p_value, std_err = stats.linregress(
+#     df.v_a.values, df_in3.v_a.values
+# )
+
+# print("R2 temp", r_value1 ** 2)
+# print("R2 wind", r_value2 ** 2)

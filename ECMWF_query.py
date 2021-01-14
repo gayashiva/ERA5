@@ -37,15 +37,15 @@ class ECMWF_query:
             self.area = "46.7/8.25/46.64/8.31"
 
         self.parameters = [
-            # "10m_u_component_of_wind",
-            # "10m_v_component_of_wind",
+            "10m_u_component_of_wind",
+            "10m_v_component_of_wind",
             # "2m_temperature",
-            # "2m_dewpoint_temperature",
-            # "surface_pressure",
-            "surface_solar_radiation_downwards",
-            "surface_thermal_radiation_downwards",
-            # "total_precipitation",
-            # "specific_humidity",
+            "2m_dewpoint_temperature",
+            "surface_pressure",
+            # "surface_solar_radiation_downwards",
+            # "surface_thermal_radiation_downwards",
+            "total_precipitation",
+            "specific_humidity",
             # "total_sky_direct_solar_radiation_at_surface",
             # "total_cloud_cover",
         ]
@@ -214,21 +214,6 @@ class ECMWF_query:
                 "short_name": "fdir",
                 "name": "total_sky_direct_solar_radiation_at_surface",
                 "units": "J m-2",
-            },
-            "total_cloud_cover": {
-                "short_name": "tcc",
-                "name": "total_cloud_cover",
-                "units": "None",
-            },
-            "specific_humidity": {
-                "short_name": "q",
-                "name": "specific_humidity",
-                "units": "kg kg-1",
-            },
-            "relative_humidity": {
-                "short_name": "r",
-                "name": "relative_humidity",
-                "units": "%",
             },
             "relative_humidity": {
                 "short_name": "r",
