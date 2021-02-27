@@ -6,7 +6,7 @@ import os
 import re
 
 site = "schwarzsee"
-compile = "False"
+compile = "True"
 os.chdir("results/" + site + "/csv")
 begin = datetime(2019, 1, 1)
 stop = datetime(2019, 12, 31, 23)
@@ -81,9 +81,10 @@ if df_merged.isnull().values.any():
     print("Warning: Null values present")
 else:
     print("No Errors")
-df_merged.to_csv(
-    "/home/surya/Programs/Github/air_model/data/" + site + "/raw/ERA5_" + site + ".csv"
-)
+df_merged.to_csv("/home/suryab/work/ERA5/results/" + site + ".csv")
+# df_merged.to_csv(
+#     "/home/suryab/work/air_model/data/" + site + "/raw/ERA5_" + site + ".csv"
+# )
 # RMSE
 # print("RMSE Temp", ((df_merged.T_a - df_merged.T_a<) ** 2).mean() ** 0.5)
 

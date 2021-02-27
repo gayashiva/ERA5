@@ -4,12 +4,15 @@ import ECMWF_query
 
 
 class ECMWF_tools:
-    def __init__(self):
+    def __init__(self, **kwargs):
+        for key in kwargs:
+            # print(f"%s -> %s" % (key, kwargs[key]))
+            self.config_ecmwf = ECMWF_query.ECMWF_query(**kwargs)
+            # setattr(self, key, kwargs[key])
         # https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means?tab=form
         # https://confluence.ecmwf.int/pages/viewpage.action?pageId=82870405#ERA5:datadocumentation-Table4
         # Check data availability: http://apps.ecmwf.int/datasets/
 
-        self.config_ecmwf = ECMWF_query.ECMWF_query()
         self.server = cdsapi.Client(debug=self.config_ecmwf.debug)
 
     def create_requests(self):
@@ -124,6 +127,7 @@ class ECMWF_tools:
             "variable": [parameter],
             "format": "grib",
             "area": self.config_ecmwf.area,
+            # "area": area,
             "verbose": self.config_ecmwf.debug,
         }
         # # Add more specific options for variables on pressure surfaces
@@ -152,5 +156,8 @@ class ECMWF_tools:
 
 
 if __name__ == "__main__":
-    tool = ECMWF_tools()
-    tool.create_requests()
+    locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+    for key in locations:
+        print(f"Location -> %s" % (key))
+        tool = ECMWF_tools(location = key)
+        tool.create_requests()
