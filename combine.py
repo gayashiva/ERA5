@@ -5,10 +5,12 @@ from datetime import datetime, timedelta
 import os
 import re
 
-locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+# locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+locations = ["schwarzsee"]
 compile = "True"
 for site in locations:
     years = ["2019", "2020", "2021"]
+    # years = ["2021"]
     os.chdir("/home/suryab/work/ERA5/results/" + site + "/")
 
     if compile == "True":
@@ -93,7 +95,7 @@ for site in locations:
             print("Warning: Null values present")
         else:
             print("No Errors")
-        df_merged.to_csv("/home/suryab/work/ERA5/results/" + site + "_" + year + ".csv")
+        df_merged.to_csv("/home/suryab/work/ERA5/outputs/" + site + "_" + year + ".csv")
 # df_merged.to_csv(
 #     "/home/suryab/work/air_model/data/" + site + "/raw/ERA5_" + site + ".csv"
 # )

@@ -157,7 +157,8 @@ class ECMWF_tools:
 
 if __name__ == "__main__":
     locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+    # locations = ["leh"]
     for key in locations:
         print(f"Location -> %s" % (key))
-        tool = ECMWF_tools(location = key)
+        tool = ECMWF_tools(location=key)
         tool.create_requests()
