@@ -18,7 +18,7 @@ class ECMWF_query:
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
         # self.site = location
-        self.start_year = 2019
+        self.start_year = 2021
         self.end_year = 2021
         self.debug = False
         self.optionals = False
