@@ -40,11 +40,14 @@ class ECMWF_tools:
                     year,
                     self.config_ecmwf.reanalysis,
                 )
-                if os.path.exists(out_filename):
-                    print("File exists")
-                else:
-                    # os.remove(out_filename)
+
+                overwrite = 1
+                if os.path.exists(out_filename) and overwrite:
+                    print("Overwriting File")
+                    os.remove(out_filename)
                     self.submit_request(parameter, year, out_filename)
+                else:
+                    print("File exists")
 
     def submit_request(self, parameter, year, out_filename):
 
@@ -157,7 +160,7 @@ class ECMWF_tools:
 
 if __name__ == "__main__":
     # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-    locations = ["diavolezza"]
+    locations = ["guttannen"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)
