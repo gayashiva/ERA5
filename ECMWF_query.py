@@ -12,14 +12,15 @@ class ECMWF_query:
             leh="34.11/77.45/34.09/77.55",
             guttannen="46.7/8.25/46.64/8.31",
             diavolezza="46.4/9.90/46.50/10.0",  # 46.44109, 9.98425
+            ravat="39.85/70.15/39.95/70.25",  # 39.871118059127895, 70.17066632798065
         )
         self.resultsdir = "results/" + self.location + "/"
         self.area = self.locations[self.location]
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
         # self.site = location
-        self.start_year = 2021
-        self.end_year = 2021
+        self.start_year = 2020
+        self.end_year = 2020
         self.debug = False
         self.optionals = False
         self.time_units = "days since 1948-01-01 00:00:00"

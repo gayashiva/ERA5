@@ -6,11 +6,12 @@ import os
 import re
 
 # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-locations = ["guttannen"]
+# locations = ["guttannen"]
+locations = ["ravat"]
 compile = "True"
 for site in locations:
     # years = ["2019", "2020", "2021"]
-    years = ["2021"]
+    years = ["2020"]
     os.chdir("/home/suryab/work/ERA5/results/" + site + "/")
 
     if compile == "True":
