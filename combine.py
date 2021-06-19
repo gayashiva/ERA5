@@ -7,7 +7,7 @@ import re
 
 # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
 # locations = ["guttannen"]
-locations = ["ravat"]
+locations = ["leh"]
 compile = "True"
 for site in locations:
     # years = ["2019", "2020", "2021"]

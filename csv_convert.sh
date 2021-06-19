@@ -1,7 +1,7 @@
 #!/bin/bash
-for f in results/ravat/*.grib
+for f in results/leh/*.grib
 do 
 #  out = "csv/"
-  echo "results/ravat/csv/$(basename ${f%.*}.csv)"
-  grib_get_data -p dataDate,shortName,validityTime "$f"> "results/ravat/csv/$(basename ${f%.*}.csv)"
+  echo "results/leh/csv/$(basename ${f%.*}.csv)"
+  grib_get_data -p dataDate,shortName,validityTime "$f"> "results/leh/csv/$(basename ${f%.*}.csv)"
 done

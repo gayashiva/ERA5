@@ -41,7 +41,7 @@ class ECMWF_tools:
                     self.config_ecmwf.reanalysis,
                 )
 
-                overwrite = 0
+                overwrite = 1
                 if os.path.exists(out_filename):
                     if overwrite:
                         print("Overwriting File")
@@ -164,7 +164,7 @@ class ECMWF_tools:
 if __name__ == "__main__":
     # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
     # locations = ["guttannen"]
-    locations = ["ravat"]
+    locations = ["leh"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)
