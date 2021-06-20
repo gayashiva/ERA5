@@ -11,7 +11,7 @@ locations = ["leh"]
 compile = "True"
 for site in locations:
     # years = ["2019", "2020", "2021"]
-    years = ["2020"]
+    years = ["2021"]
     os.chdir("/home/suryab/work/ERA5/results/" + site + "/")
 
     if compile == "True":
