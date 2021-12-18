@@ -19,7 +19,7 @@ class ECMWF_query:
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
         # self.site = location
-        self.start_year = 2021
+        self.start_year = 2020
         self.end_year = 2021
         self.debug = False
         self.optionals = False
@@ -38,20 +38,20 @@ class ECMWF_query:
             "10m_u_component_of_wind",
             "10m_v_component_of_wind",
             "2m_temperature",
-            "2m_dewpoint_temperature",
             "surface_pressure",
             "surface_solar_radiation_downwards",
             "surface_thermal_radiation_downwards",
             "total_precipitation",
             "total_sky_direct_solar_radiation_at_surface",
-            # "specific_humidity",
-            # "total_cloud_cover",
+            "specific_humidity",
+            # "relative_humidity",
+            "total_cloud_cover",
         ]
 
         if self.optionals:
             self.parameters.append(
+                "2m_dewpoint_temperature",
                 "evaporation",
-                "relative_humidity",
                 "mean_surface_downward_short_wave_radiation_flux",
                 "mean_surface_net_short_wave_radiation_flux"
                 "mean_surface_sensible_heat_flux",

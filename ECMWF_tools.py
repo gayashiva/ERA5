@@ -33,7 +33,8 @@ class ECMWF_tools:
 
                 metadata = self.config_ecmwf.get_parameter_metadata(parameter)
 
-                out_filename = "{}{}_{}_year_{}_{}.grib".format(
+                # out_filename = "{}{}_{}_year_{}_{}.grib".format(
+                out_filename = "{}{}_{}_year_{}_{}.nc".format(
                     self.config_ecmwf.resultsdir,
                     self.config_ecmwf.dataset,
                     metadata["short_name"],
@@ -131,7 +132,8 @@ class ECMWF_tools:
                 "23:00",
             ],
             "variable": [parameter],
-            "format": "grib",
+            # "format": "grib",
+            "format": "netcdf",
             "area": self.config_ecmwf.area,
             # "area": area,
             "verbose": self.config_ecmwf.debug,
@@ -162,9 +164,10 @@ class ECMWF_tools:
 
 
 if __name__ == "__main__":
-    # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-    # locations = ["guttannen"]
-    locations = ["leh"]
+    locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+    # locations = ["schwarzsee", "diavolezza"]
+    # locations = ["guttannen", "leh"]
+    # locations = ["leh"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)
