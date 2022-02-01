@@ -164,10 +164,10 @@ class ECMWF_tools:
 
 
 if __name__ == "__main__":
-    locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
+    # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
     # locations = ["schwarzsee", "diavolezza"]
     # locations = ["guttannen", "leh"]
-    # locations = ["leh"]
+    locations = ["guttannen"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)

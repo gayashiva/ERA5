@@ -108,3 +108,4 @@ target/
 # vim
 *.swp
 *.swo
+.tasks
