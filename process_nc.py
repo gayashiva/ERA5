@@ -13,7 +13,7 @@ locations = ["guttannen"]
 # locations = ["schwarzsee", "guttannen", "diavolezza"]
 for loc in locations:
     print(loc)
-    when = "2021"
+    when = "2022"
     os.chdir("/home/suryab/work/ERA5/results/" + loc + "/")
 
     da = xr.open_mfdataset("*.nc", parallel=True)
@@ -22,8 +22,10 @@ for loc in locations:
     df = df.reset_index()
     df = df.set_index("time")
     df = df.drop(['longitude', 'latitude', 'expver'], axis=1)
+    df = df.dropna(axis=1, how='all')
     print(df.describe())
-    print(df)
+    print(df.head())
+    print(df.tail(20))
 
     df.to_csv( "/home/suryab/work/ERA5/outputs/" + loc + "_" + when + ".csv")
 
