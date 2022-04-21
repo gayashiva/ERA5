@@ -45,12 +45,12 @@ class ECMWF_query:
             "total_precipitation",
             "total_sky_direct_solar_radiation_at_surface",
             "specific_humidity",
-            # "relative_humidity",
             "total_cloud_cover",
         ]
 
         if self.optionals:
             self.parameters.append(
+            # "relative_humidity",
                 "evaporation",
                 "mean_surface_downward_short_wave_radiation_flux",
                 "mean_surface_net_short_wave_radiation_flux"
