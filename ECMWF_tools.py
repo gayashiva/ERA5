@@ -64,13 +64,13 @@ class ECMWF_tools:
                 "03",
                 "04",
                 "05",
-                # "06",
-                # "07",
-                # "08",
-                # "09",
-                # "10",
-                # "11",
-                # "12",
+                "06",
+                "07",
+                "08",
+                "09",
+                "10",
+                "11",
+                "12",
             ],
             "day": [
                 "01",
@@ -136,7 +136,7 @@ class ECMWF_tools:
             "format": "netcdf",
             "area": self.config_ecmwf.area,
             # "area": area,
-            "verbose": self.config_ecmwf.debug,
+            # "verbose": self.config_ecmwf.debug,
         }
         # # Add more specific options for variables on pressure surfaces
         # if parameter == "specific_humidity":
@@ -167,7 +167,7 @@ if __name__ == "__main__":
     # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
     # locations = ["schwarzsee", "diavolezza"]
     # locations = ["guttannen", "leh"]
-    locations = ["guttannen"]
+    locations = ["altiplano"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)
