@@ -2,7 +2,6 @@ import os
 import cdsapi
 import ECMWF_query
 
-
 class ECMWF_tools:
     def __init__(self, **kwargs):
         for key in kwargs:
@@ -167,7 +166,7 @@ if __name__ == "__main__":
     # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
     # locations = ["schwarzsee", "diavolezza"]
     # locations = ["guttannen", "leh"]
-    locations = ["altiplano"]
+    locations = ["leh"]
     for key in locations:
         print(f"Location -> %s" % (key))
         tool = ECMWF_tools(location=key)

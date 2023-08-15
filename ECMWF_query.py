@@ -13,7 +13,7 @@ class ECMWF_query:
             guttannen="46.7/8.25/46.64/8.31",
             diavolezza="46.4/9.90/46.50/10.0",  # 46.44109, 9.98425
             ravat="39.85/70.15/39.95/70.25",  # 39.871118059127895, 70.17066632798065
-            altiplano="-17.1/-69.95/-17.15/-70.05",  # -17.14375, -69.997917
+            altiplano="-17.15/-70/-17.1/-69.5",  # -17.14375, -69.997917
         )
         self.resultsdir = "results/" + self.location + "/"
         self.area = self.locations[self.location]

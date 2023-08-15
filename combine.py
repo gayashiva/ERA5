@@ -6,16 +6,17 @@ import os
 import re
 
 # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-locations = ["guttannen"]
+locations = ["altiplano"]
 # locations = ["leh"]
 compile = "True"
 for site in locations:
     # years = ["2019", "2020", "2021"]
-    years = ["2021", "2022"]
-    os.chdir("/home/suryab/work/ERA5/results/" + site + "/")
+    years = ["2019", "2020"]
+    os.chdir("/home/bsurya/Projects/ERA5/results/" + site + "/")
 
     if compile == "True":
         if not os.path.exists("csv/output"):
+            os.mkdir("csv")
             os.mkdir("csv/output")
         else:
             # Delete folder contents
@@ -96,7 +97,7 @@ for site in locations:
             print("Warning: Null values present")
         else:
             print("No Errors")
-        df_merged.to_csv("/home/suryab/work/ERA5/outputs/" + site + "_" + year + ".csv")
+        df_merged.to_csv("/home/bsurya/Projects/ERA5/outputs/" + site + "_" + year + ".csv")
 # df_merged.to_csv(
 #     "/home/suryab/work/air_model/data/" + site + "/raw/ERA5_" + site + ".csv"
 # )
