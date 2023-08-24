@@ -14,6 +14,11 @@ class ECMWF_query:
             diavolezza="46.4/9.90/46.50/10.0",  # 46.44109, 9.98425
             ravat="39.85/70.15/39.95/70.25",  # 39.871118059127895, 70.17066632798065
             altiplano="-17.15/-70/-17.1/-69.5",  # -17.14375, -69.997917
+            south_america="-17.15/-70/-17.1/-69.5",
+            central_asia="69.2/95.2/69.3/95.3",
+            europe="67.2/17.7/67.3/17.8", 
+            north_america="81.7/-78.3/81.8/-78.2",
+            global="-90/-180/90/179.75",
         )
         self.resultsdir = "results/" + self.location + "/"
         self.area = self.locations[self.location]
@@ -40,13 +45,13 @@ class ECMWF_query:
             "10m_v_component_of_wind",
             "2m_temperature",
             "2m_dewpoint_temperature",
-            "surface_pressure",
-            "surface_solar_radiation_downwards",
-            "surface_thermal_radiation_downwards",
             "total_precipitation",
-            "total_sky_direct_solar_radiation_at_surface",
-            "specific_humidity",
-            "total_cloud_cover",
+            # "surface_pressure",
+            # "surface_solar_radiation_downwards",
+            # "surface_thermal_radiation_downwards",
+            # "total_sky_direct_solar_radiation_at_surface",
+            # "specific_humidity",
+            # "total_cloud_cover",
         ]
 
         if self.optionals:
