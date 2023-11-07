@@ -24,25 +24,26 @@ def e_sat(T, surface="water", a1=611.21, a3=17.502, a4=32.19):
     return a1 * np.exp(a3 * (T - 273.16) / (T - a4))
 
 # locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-# locations = ["leh", "guttannen"]
-locations = ["north_america", "europe", "south_america", "central_asia"]
+locations = ["leh"]
+coords = (34.216638,77.606949)
+# locations = ["north_america", "europe", "south_america", "central_asia"]
 years = ["2019", "2020"]
 
-# reading the data from the file
-with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
-    locs = f.read()
+# # reading the data from the file
+# with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
+#     locs = f.read()
 
-# reconstructing the data as a dictionary
-locs = json.loads(locs)
+# # reconstructing the data as a dictionary
+# locs = json.loads(locs)
 
-for loc, coords in locs.items():
+# for loc, coords in locs.items():
+for loc in locations:
     for when in years:
         print(loc, when)
 
     # print(str(value[0] - 0.05) + "/" + str(value[1] - 0.05) +"/"+str(value[0] + 0.05) + "/" +str(value[1] +0.05))
 
 # locations = ["south_america", "europe", "north_america", "central_asia"]
-# coords = (-29.75, -69.75)
 # locations = ["schwarzsee", "guttannen", "diavolezza"]
 # for loc in locations:
     # for when in years:
@@ -52,7 +53,7 @@ for loc, coords in locs.items():
 
         da = xr.open_mfdataset("*.nc", parallel=True)
         da = da.sel(latitude=coords[0], longitude=coords[1], method='nearest')
-        print(da)
+        print(da.v10)
         # df = da.sel(time=when).t2m.to_dataframe()
         df = da.sel(time=when).to_dataframe()
         df = df.reset_index()
@@ -94,12 +95,12 @@ for loc, coords in locs.items():
         )
 
         # df = df.drop(['ssrd', 'strd', 'tp'], axis=1)
-        df = df.dropna(axis=1, how='all')
+        # df = df.dropna(axis=1, how='all')
         df = df.round(3)
         print(df.columns)
-        print(df.describe())
+        # print(df.describe())
         print(df.head())
-        print(df.tail(20))
+        print(df.tail())
 
         # Process data for ERA5
 
