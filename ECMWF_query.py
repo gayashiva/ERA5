@@ -16,8 +16,8 @@ class ECMWF_query:
             ravat="39.85/70.15/39.95/70.25",  # 39.871118059127895, 70.17066632798065
             altiplano="-17.15/-70/-17.1/-69.5",  # -17.14375, -69.997917
             south_america="-17.15/-70/-17.1/-69.5",
-            # central_asia="69.2/95.2/69.3/95.3",
-            central_asia2="36.2/90.7/36.3/90.8",
+            central_asia="69.2/95.2/69.3/95.3",
+            # central_asia2="36.2/90.7/36.3/90.8",
             europe="67.2/17.7/67.3/17.8", 
             north_america="81.7/-78.3/81.8/-78.2",
         )
@@ -26,8 +26,8 @@ class ECMWF_query:
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
         # self.site = location
-        self.start_year = 2019
-        self.end_year = 2019
+        self.start_year = 2021
+        self.end_year = 2021
         self.overwrite = 0
         self.debug = False
         self.optionals = False
@@ -49,7 +49,8 @@ class ECMWF_query:
             "2m_dewpoint_temperature",
             "total_precipitation",
             # "surface_pressure",
-            "mean_surface_solar_radiation_downwards",
+            "surface_solar_radiation_downwards",
+            # "mean_surface_downward_short_wave_radiation_flux",
             # "surface_thermal_radiation_downwards",
             # "total_sky_direct_solar_radiation_at_surface",
             # "specific_humidity",
@@ -206,21 +207,21 @@ class ECMWF_query:
                 "name": "Surface pressure",
                 "units": "Pa",
             },
-            # "surface_solar_radiation_downwards": {
-            #     "short_name": "ssrd",
-            #     "name": "Surface solar radiation downwards",
-            #     "units": "J m-2",
-            # },
-            # "surface_thermal_radiation_downwards": {
-            #     "short_name": "strd",
-            #     "name": "Surface thermal radiation downwards",
-            #     "units": "J m-2",
-            # },
-            # "total_sky_direct_solar_radiation_at_surface": {
-            #     "short_name": "fdir",
-            #     "name": "total_sky_direct_solar_radiation_at_surface",
-            #     "units": "J m-2",
-            # },
+            "surface_solar_radiation_downwards": {
+                "short_name": "ssrd",
+                "name": "Surface solar radiation downwards",
+                "units": "J m-2",
+            },
+            "surface_thermal_radiation_downwards": {
+                "short_name": "strd",
+                "name": "Surface thermal radiation downwards",
+                "units": "J m-2",
+            },
+            "total_sky_direct_solar_radiation_at_surface": {
+                "short_name": "fdir",
+                "name": "total_sky_direct_solar_radiation_at_surface",
+                "units": "J m-2",
+            },
             "relative_humidity": {
                 "short_name": "r",
                 "name": "relative_humidity",

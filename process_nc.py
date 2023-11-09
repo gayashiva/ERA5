@@ -29,9 +29,9 @@ coords = (34.216638,77.606949)
 # locations = ["north_america", "europe", "south_america", "central_asia"]
 years = ["2019", "2020"]
 
-# # reading the data from the file
-# with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
-#     locs = f.read()
+# reading the data from the file
+with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
+    locs = f.read()
 
 # # reconstructing the data as a dictionary
 # locs = json.loads(locs)
@@ -52,55 +52,12 @@ for loc in locations:
         os.chdir("/home/bsurya/Projects/ERA5/results/" + loc + "/")
 
         da = xr.open_mfdataset("*.nc", parallel=True)
-        da = da.sel(latitude=coords[0], longitude=coords[1], method='nearest')
-        print(da.v10)
+        # da = da.sel(latitude=coords[0], longitude=coords[1], method='nearest')
+        # print(da.v10)
         # df = da.sel(time=when).t2m.to_dataframe()
         df = da.sel(time=when).to_dataframe()
-        df = df.reset_index()
-        df = df.set_index("time")
-
-        time_steps = 60 * 60
-        # df["ssrd"] /= time_steps
-        # df["strd"] /= time_steps
-        df['wind'] = np.sqrt(df.u10**2 + df.v10**2)
-        # df["tp"] = df["tp"] * 1000  # mm
-        # Derive RH
-        df["t2m"] -= 273.15
-        df["d2m"] -= 273.15
-        df["t2m_RH"] = df["t2m"].copy()
-        df["d2m_RH"] = df["d2m"].copy()
-        df= df.apply(lambda x: e_sat(x) if x.name == "t2m_RH" else x)
-        df= df.apply(lambda x: e_sat(x) if x.name == "d2m_RH" else x)
-        df["RH"] = 100 * df["d2m_RH"] / df["t2m_RH"]
-        # df["sp"] /= 100
-        df["tp"] *= 1000 #ppt in mm
-        df["ppt"] = df.tp.diff()
-        df = df.drop(['tp'], axis=1)
-        df.loc[df.ppt.isna(), "ppt"] = 0
-        df.loc[df.ppt<0, "ppt"] = 0
-        df = df.drop(['longitude', 'latitude', 'u10', 'v10', 't2m_RH', 'd2m_RH', 'd2m'], axis=1)
-        df = df.reset_index()
-
-        # CSV output
-        df.rename(
-            columns={
-                # "time": "TIMESTAMP",
-                "t2m": "temp",
-                "sp": "press",
-                # "ssrd": "SW_global",
-                # "fdir": "SW_direct",
-                # "strd": "LW_in",
-            },
-            inplace=True,
-        )
-
-        # df = df.drop(['ssrd', 'strd', 'tp'], axis=1)
-        # df = df.dropna(axis=1, how='all')
-        df = df.round(3)
-        print(df.columns)
-        # print(df.describe())
         print(df.head())
-        print(df.tail())
+        df = df.reset_index()
 
         # Process data for ERA5
 

@@ -42,7 +42,7 @@ class ECMWF_tools:
                 )
 
                 if os.path.exists(out_filename):
-                    if self.overwrite:
+                    if self.config_ecmwf.overwrite:
                         print("Overwriting File")
                         os.remove(out_filename)
                         self.submit_request(parameter, year, out_filename)
