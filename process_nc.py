@@ -23,54 +23,43 @@ def e_sat(T, surface="water", a1=611.21, a3=17.502, a4=32.19):
         a4 = -0.7  # K
     return a1 * np.exp(a3 * (T - 273.16) / (T - a4))
 
-# locations = ["schwarzsee", "leh", "guttannen", "diavolezza"]
-locations = ["leh"]
-coords = (34.216638,77.606949)
-# locations = ["north_america", "europe", "south_america", "central_asia"]
-years = ["2019", "2020"]
-
+locations = ["leh", "north_america", "europe", "south_america", "central_asia"]
 # reading the data from the file
 with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
-    locs = f.read()
+    sites = f.read()
+# reconstructing the data as a dictionary
+sites = json.loads(sites)
+years = ["2019", "2020"]
 
-# # reconstructing the data as a dictionary
-# locs = json.loads(locs)
-
-# for loc, coords in locs.items():
 for loc in locations:
     for when in years:
+        print()
         print(loc, when)
-
-    # print(str(value[0] - 0.05) + "/" + str(value[1] - 0.05) +"/"+str(value[0] + 0.05) + "/" +str(value[1] +0.05))
-
-# locations = ["south_america", "europe", "north_america", "central_asia"]
-# locations = ["schwarzsee", "guttannen", "diavolezza"]
-# for loc in locations:
-    # for when in years:
-        # print(loc)
-        # when = "2019"
         os.chdir("/home/bsurya/Projects/ERA5/results/" + loc + "/")
 
         da = xr.open_mfdataset("*.nc", parallel=True)
-        # da = da.sel(latitude=coords[0], longitude=coords[1], method='nearest')
-        # print(da.v10)
-        # df = da.sel(time=when).t2m.to_dataframe()
+        da = da.sel(latitude=sites[loc][0], longitude=sites[loc][1], method='nearest')
         df = da.sel(time=when).to_dataframe()
+        df = df.drop(['longitude', 'latitude'], axis=1)
         print(df.head())
-        df = df.reset_index()
+        # df = df.reset_index()
 
         # Process data for ERA5
-
         df.to_csv( "/home/bsurya/Projects/ERA5/outputs/" + loc + "_" + when + ".csv")
 
-        # da.close()
-
-        # da = xr.open_mfdataset("era5_tcc_year_2022_reanalysis-era5-single-levels.nc", parallel=True)
-        # df = da.sel(time=when, expver=1).to_dataframe()
-        # df = df.reset_index()
-        # df = df.set_index("time")
-        # df = df.drop(['longitude', 'latitude', 'expver'], axis=1)
-        # df = df.dropna(axis=1, how='all')
-        # print(df.describe())
-        # print(get_percentage_missing(df["tcc"]))
-
+    df1= pd.read_csv(
+        "/home/bsurya/Projects/ERA5/outputs/" + loc + "_2019.csv",
+        sep=",",
+        header=0,
+        parse_dates=["time"],
+    )
+    df2= pd.read_csv(
+        "/home/bsurya/Projects/ERA5/outputs/" + loc + "_2020.csv",
+        sep=",",
+        header=0,
+        parse_dates=["time"],
+    )
+    # Combine DataFrames
+    df3 = pd.concat([df1, df2])
+    df3['time'] = pd.to_datetime(df3['time'])
+    df3.to_csv( "/home/bsurya/Projects/air_model/data/era5/" + loc + "20" + ".csv")
