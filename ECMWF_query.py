@@ -26,8 +26,8 @@ class ECMWF_query:
         # https://www.ecmwf.int/en/forecasts/access-forecasts/ecmwf-web-api
         self.use_era5 = True
         # self.site = location
-        self.start_year = 2021
-        self.end_year = 2021
+        self.start_year = 2019
+        self.end_year = 2020
         self.overwrite = 0
         self.debug = False
         self.optionals = False
@@ -39,22 +39,23 @@ class ECMWF_query:
         if not os.path.exists(self.resultsdir):
             os.mkdir(self.resultsdir)
 
-        self.reanalysis = "reanalysis-era5-land"  # "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
+        # self.reanalysis = "reanalysis-era5-land"  # "reanalysis-era5-land"  # "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
+        self.reanalysis = "reanalysis-era5-single-levels"  # 'reanalysis-era5-complete'
         # self.area = "60/0/59/1"  # test setup North/West/South/East
 
         self.parameters = [
-            "10m_u_component_of_wind",
-            "10m_v_component_of_wind",
-            "2m_temperature",
-            "2m_dewpoint_temperature",
-            "total_precipitation",
+            # "10m_u_component_of_wind",
+            # "10m_v_component_of_wind",
+            # "2m_temperature",
+            # "2m_dewpoint_temperature",
+            # "total_precipitation",
             # "surface_pressure",
-            "surface_solar_radiation_downwards",
+            "total_cloud_cover",
+            # "surface_solar_radiation_downwards",
             # "mean_surface_downward_short_wave_radiation_flux",
             # "surface_thermal_radiation_downwards",
             # "total_sky_direct_solar_radiation_at_surface",
             # "specific_humidity",
-            # "total_cloud_cover",
         ]
 
         if self.optionals:

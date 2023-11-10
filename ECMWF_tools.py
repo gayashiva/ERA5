@@ -166,7 +166,7 @@ if __name__ == "__main__":
     # locations = ["schwarzsee", "diavolezza"]
     # locations = ["guttannen", "leh"]
     # locations = ["central_asia2"]
-    locations = ["south_america", "europe", "north_america", "central_asia", "leh"]
+    locations = ["leh", "south_america", "europe", "north_america", "central_asia"]
     for key in locations:
         print(f"\n\tLocation -> %s" % (key))
         tool = ECMWF_tools(location=key)

@@ -5,6 +5,7 @@ import numpy as np
 from datetime import datetime, timedelta
 import os
 import json
+from timezonefinder import TimezoneFinder
 
 def get_percentage_missing(series):
     """ Calculates percentage of NaN values in DataFrame
@@ -15,20 +16,13 @@ def get_percentage_missing(series):
     den = len(series)
     return round(num/den, 2)
 
-def e_sat(T, surface="water", a1=611.21, a3=17.502, a4=32.19):
-    T += 273.16
-    if surface == "ice":
-        a1 = 611.21  # Pa
-        a3 = 22.587  # NA
-        a4 = -0.7  # K
-    return a1 * np.exp(a3 * (T - 273.16) / (T - a4))
-
 locations = ["leh", "north_america", "europe", "south_america", "central_asia"]
 # reading the data from the file
 with open("/home/bsurya/Projects/AIR-Zones/output/max_region_coords.json") as f:
     sites = f.read()
 # reconstructing the data as a dictionary
 sites = json.loads(sites)
+tf = TimezoneFinder(in_memory=True)
 years = ["2019", "2020"]
 
 for loc in locations:
@@ -41,8 +35,10 @@ for loc in locations:
         da = da.sel(latitude=sites[loc][0], longitude=sites[loc][1], method='nearest')
         df = da.sel(time=when).to_dataframe()
         df = df.drop(['longitude', 'latitude'], axis=1)
+        local_time_zone = tf.timezone_at(lat=sites[loc][0], lng=sites[loc][1])
+        print(local_time_zone)
+        df.index = df.index.tz_localize('UTC').tz_convert(local_time_zone).tz_localize(None)
         print(df.head())
-        # df = df.reset_index()
 
         # Process data for ERA5
         df.to_csv( "/home/bsurya/Projects/ERA5/outputs/" + loc + "_" + when + ".csv")
