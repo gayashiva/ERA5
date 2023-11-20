@@ -44,14 +44,14 @@ class ECMWF_query:
         # self.area = "60/0/59/1"  # test setup North/West/South/East
 
         self.parameters = [
-            # "10m_u_component_of_wind",
-            # "10m_v_component_of_wind",
-            # "2m_temperature",
-            # "2m_dewpoint_temperature",
+            "10m_u_component_of_wind",
+            "10m_v_component_of_wind",
+            "2m_temperature",
+            "2m_dewpoint_temperature",
+            "total_cloud_cover",
+            "surface_solar_radiation_downwards",
             # "total_precipitation",
             # "surface_pressure",
-            "total_cloud_cover",
-            # "surface_solar_radiation_downwards",
             # "mean_surface_downward_short_wave_radiation_flux",
             # "surface_thermal_radiation_downwards",
             # "total_sky_direct_solar_radiation_at_surface",
